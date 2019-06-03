@@ -37,7 +37,9 @@
             socket.on('tweet', function(objectData){
                 console.log(objectData);
                 t = objectData.data;
-                $('#tweets').append("<b> Handle: " + t.results[0].user.screen_name + " </b><br><div class='content'>" + t.results[0].text + "</div>");
+                for(var i = 0; i < t.results.length; i++){
+                    $('#tweets').append("<b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
+                }
             });
         });
     </script>

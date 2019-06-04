@@ -8,11 +8,14 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);;
 
+var tweets = {
+
+}
+
 var params = {
-    query: 'iron man dies -spoiler',
-    maxResults: 10,
-    fromDate: '201904260000',
-    toDate: '201905100000'  
+    q: 'iron man dies -spoiler',
+    count: 1,
+ 
 }
 
 server.listen(3000);
@@ -28,7 +31,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 io.on('connection', function(socket){
     //socket.emit('welcome', { data: 'welcome'});
-    T.get('https://api.twitter.com/1.1/tweets/search/fullarchive/FullSearch.json', params, function(err, data, response){
+    T.get('search/tweets', params, function(err, data, response){
         if(!err){
             var results = []
             /*for(let i = 0; i < data.results.length; i++){

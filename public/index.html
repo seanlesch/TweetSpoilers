@@ -42,13 +42,21 @@
                 socket.on('tweet', function(objectData, next){
                     var t = objectData.data;
                     for(var i = 0; i < t.statuses.length; i++){
-                        $('#tweets').append("<b> Handle: " + t.statuses[i].user.screen_name + " </b><br><div class='content'>" + t.statuses[i].text + "</div><br>");
+                        $('#tweets').append(
+                            $("<div>").html('<a href="#">Handle: '+t.statuses[i].user.screen_name +'</a>')
+                            .append(
+                                $("<div>").text(t.statuses[i].text).hide()
+                            )
+                            .on('click', function(){
+                                $(this).children('div').show();
+                            })
+                        )    
                     }
-                    
                 });
-                $('#getresults').addClass('invisible');
+            $('#getresults').addClass('invisible');
             });
         });
+        
        
     </script>
 </html>

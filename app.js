@@ -30,7 +30,6 @@ io.on('connection', function (socket) {
         T.get('search/tweets', params, function(err, data, response){
             if(!err && response.statusCode === 200){
                 io.emit('tweet', { data: data });
-                
             } else {
                 console.log(err);
             }

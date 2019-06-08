@@ -79,8 +79,7 @@
                 <button class = 'btn btn-primary' id = 'getresults' style="width:100%">Get results</button>
             </form>
             <br>
-            
-            <div class = "col-md-4" id="tweets">
+            <div id="tweets">
               <h1>Tweets</h1>
             <div id = "tweets"></div>
 			
@@ -106,9 +105,9 @@
         $('document').ready(function(){
             var socket= io.connect('http://localhost:3000');
         
-            $('#getresults').on('click', function(next){
+            $('#getresults').on('click', function(){
                 socket.emit('getresults', 'to add');
-                socket.on('tweet', function(objectData, next){
+                socket.on('tweet', function(objectData){
                     var t = objectData.data;
                     for(var i = 0; i < t.statuses.length; i++){
                         $('#tweets').append(
@@ -126,8 +125,6 @@
             $('#getresults').addClass('disabled');
 
             });
-        });
-        
-       
+        });   
     </script>
 </html>

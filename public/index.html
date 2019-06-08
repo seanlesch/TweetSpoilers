@@ -14,7 +14,12 @@
 
     <style>
         .navbar {
-			margin-bottom:30px;
+			    margin-bottom:30px;
+        }
+
+        .profilepic{
+          width:50px;
+          height:50px;
         }
             
     </style>
@@ -114,7 +119,7 @@
                 console.log(objectData);
                 t = objectData.data;
                 for(var i = 0; i < t.results.length; i++){
-                    $('#tweets').append("<iframe src=" + t.results[i].user.profile_image_url_https + " frameborder=0 scrolling=no onload=this.style.height=this.contentDocument.body.scrollHeight +'px';></iframe><br><b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
+                    $('#tweets').append("<br><iframe class=profilepic src=" + t.results[i].user.profile_image_url_https + " frameborder=0 scrolling=no onload=this.style.height=this.contentDocument.body.scrollHeight +'px';></iframe><b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
                 }
             });
         });

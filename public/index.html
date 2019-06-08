@@ -81,12 +81,17 @@
     </div>
     <div class = "col-md-4 offset-md-4" id="tweets">
         <h1>Tweets</h1>
-        <!---enter url from profile picture object in user object to display profile picture
-              can edit css for ifram to adjust size-->
-        <iframe src="#"></iframe>
     </div>
 		<footer class="container">
-			<p></p>
+			<nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
 		</footer>
         <!---
         <div class = "container">
@@ -119,7 +124,7 @@
                 console.log(objectData);
                 t = objectData.data;
                 for(var i = 0; i < t.results.length; i++){
-                    $('#tweets').append("<br><iframe class=profilepic src=" + t.results[i].user.profile_image_url_https + " frameborder=0 scrolling=no onload=this.style.height=this.contentDocument.body.scrollHeight +'px';></iframe><b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
+                    $('#tweets').append("<br><div class='card border-primary mb-3'><iframe class=profilepic src=" + t.results[i].user.profile_image_url_https + " frameborder=0 scrolling=no onload=this.style.height=this.contentDocument.body.scrollHeight +'px';></iframe><b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br></div>");
                 }
             });
         });

@@ -2,14 +2,98 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset UTF-8"/>
-        <meta name = "viewport" content="width=device-width, initial-scale=1, user-scalable=0"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <meta name = "viewport" content="width=device-width, initial-scale=1/">
+        <meta name="twitter:card" content="summary"></meta>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
         
     </head>
+
+    <style>
+        .navbar {
+			    margin-bottom:30px;
+        }
+
+        .profilepic{
+          width:50px;
+          height:50px;
+        }
+            
+    </style>
+
     <body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">TweetSpoilers</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">About</a>
+                        </li>
+                       <!--- Dropdown menu, can't get popper to work
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                        </li>
+                        --->
+                      </ul>
+                      <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+                    </div>
+                  </nav>
+
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-4">TweetSpoilers</h1>
+				<p class="lead">Track down movie spoilers with swift justice and precision.</p>
+			</div>
+		</div>
+
+		<div class="col-md-4 offset-md-4">
+            <form>
+                <div class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Input spoiler to track">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Spoilers being tracked</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </form>
+			<hr>
+    </div>
+    <div class = "col-md-4 offset-md-4" id="tweets">
+        <h1>Tweets</h1>
+    </div>
+		<footer class="container">
+			<nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+		</footer>
+        <!---
         <div class = "container">
             <div class = "row">
 
@@ -31,8 +115,10 @@
             </div>
             
         </div>
+        --->
 
     </body>
+
     <script>
         $('document').ready(function(){
             var socket= io.connect('http://localhost:3000');
@@ -55,6 +141,7 @@
                     }
                 });
             $('#getresults').addClass('invisible');
+
             });
         });
         

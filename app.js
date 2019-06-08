@@ -7,6 +7,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);;
 
+
 server.listen(3000);
 console.log("Server listening at: 3000");
 app.get('/', function(req, res){
@@ -17,6 +18,7 @@ app.get('/', function(req, res){
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 io.on('connection', function (socket) {
    
@@ -34,5 +36,6 @@ io.on('connection', function (socket) {
                 console.log(err);
             }
         });
+
     });
 });

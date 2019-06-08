@@ -20,7 +20,7 @@
                 <div class = "col-md-8 main">
                     <h1>Tweets</h1>
                     <div id = "tweets"></div>
-                    <button type='submit' class='btn btn-primary' id='nextpage'>Next page</button>
+                    <button type='submit' class='btn btn-primary' id='getresults'>Get results</button>
                 </div>
                 <br>
                 <br>
@@ -34,27 +34,21 @@
 
     </body>
     <script>
-        $('document').ready(function()
-        {
+        $('document').ready(function(){
             var socket= io.connect('http://localhost:3000');
-            socket.on('tweet', function(objectData){
-                console.log(objectData);
-                t = objectData.data;
-                for(var i = 0; i < t.statuses.length; i++){
-                    $('#tweets').append("<b> Handle: " + t.statuses[i].user.screen_name + " </b><br><div class='content'>" + t.statuses[i].text + "</div><br>");
-                }
-                
-                if(!t.search_metadata.next_results){
-                    $('#nextpage').text('End of results');
-                }
-                else{
-                    $('#nextpage').on('click', function(){
-                        socket.emit('nextpage');
-                    });
-                }
+        
+            $('#getresults').on('click', function(next){
+                socket.emit('getresults', 'to add');
+                socket.on('tweet', function(objectData, next){
+                    var t = objectData.data;
+                    for(var i = 0; i < t.statuses.length; i++){
+                        $('#tweets').append("<b> Handle: " + t.statuses[i].user.screen_name + " </b><br><div class='content'>" + t.statuses[i].text + "</div><br>");
+                    }
+                    
+                });
+                $('#getresults').addClass('invisible');
             });
-           
-           // $('.content').click(function)
         });
+       
     </script>
 </html>

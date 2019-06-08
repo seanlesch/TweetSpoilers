@@ -76,11 +76,17 @@
                     <label for="exampleFormControlTextarea1">Spoilers being tracked</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
+                <button class = 'btn btn-primary' id = 'getresults' style="width:100%">Get results</button>
             </form>
-			<hr>
+            <br>
+            
+            <div class = "col-md-4" id="tweets">
+              <h1>Tweets</h1>
+            <div id = "tweets"></div>
+			
     </div>
-    <div class = "col-md-4 offset-md-4" id="tweets">
-        <h1>Tweets</h1>
+    <hr>
+    
     </div>
 		<footer class="container">
 			<nav aria-label="Page navigation example">
@@ -93,29 +99,6 @@
         </ul>
       </nav>
 		</footer>
-        <!---
-        <div class = "container">
-            <div class = "row">
-
-                <div class="col-md-2">
-
-                </div>
-
-                <div class = "col-md-8 main">
-                    <h1>Tweets</h1>
-                    <div id = "tweets"></div>
-                    <button type='submit' class='btn btn-primary' id='getresults'>Get results</button>
-                </div>
-                <br>
-                <br>
-
-                <div class = "col-md-2">
-
-                </div>
-            </div>
-            
-        </div>
-        --->
 
     </body>
 
@@ -129,18 +112,18 @@
                     var t = objectData.data;
                     for(var i = 0; i < t.statuses.length; i++){
                         $('#tweets').append(
-                            $("<div>").html('<a href="#">Handle: '+t.statuses[i].user.screen_name +'</a>')
+                            $("<div>").html('<a href="#">'+t.statuses[i].user.screen_name +'</a>')
                             .append(
                                 $("<div>").text(t.statuses[i].text).hide()
                             )
                             .on('click', function(){
-                                $(this).children('div').show();
+                                $(this).children('div').toggle();
                                 return false;
                             })
                         )    
                     }
                 });
-            $('#getresults').addClass('invisible');
+            $('#getresults').addClass('disabled');
 
             });
         });

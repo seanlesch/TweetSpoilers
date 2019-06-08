@@ -17,8 +17,10 @@
 
                 </div>
 
-                <div class = "col-md-8 main" id="tweets">
+                <div class = "col-md-8 main">
                     <h1>Tweets</h1>
+                    <div id = "tweets"></div>
+                    <button type='submit' class='btn btn-primary' id='nextpage'>Next page</button>
                 </div>
                 <br>
                 <br>
@@ -27,6 +29,7 @@
 
                 </div>
             </div>
+            
         </div>
 
     </body>
@@ -37,10 +40,20 @@
             socket.on('tweet', function(objectData){
                 console.log(objectData);
                 t = objectData.data;
-                for(var i = 0; i < t.results.length; i++){
-                    $('#tweets').append("<b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
+                for(var i = 0; i < t.statuses.length; i++){
+                    $('#tweets').append("<b> Handle: " + t.statuses[i].user.screen_name + " </b><br><div class='content'>" + t.statuses[i].text + "</div><br>");
+                }
+                
+                if(!t.search_metadata.next_results){
+                    $('#nextpage').text('End of results');
+                }
+                else{
+                    $('#nextpage').on('click', function(){
+                        socket.emit('nextpage');
+                    });
                 }
             });
+           
            // $('.content').click(function)
         });
     </script>

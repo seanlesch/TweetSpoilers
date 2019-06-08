@@ -3,11 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset UTF-8"/>
         <meta name = "viewport" content="width=device-width, initial-scale=1/">
+        <meta name="twitter:card" content="summary"></meta>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+        
     </head>
 
     <style>
@@ -74,6 +76,9 @@
     </div>
     <div class = "col-md-4 offset-md-4" id="tweets">
         <h1>Tweets</h1>
+        <!---enter url from profile picture object in user object to display profile picture
+              can edit css for ifram to adjust size-->
+        <iframe src="#"></iframe>
     </div>
 		<footer class="container">
 			<p></p>
@@ -109,7 +114,7 @@
                 console.log(objectData);
                 t = objectData.data;
                 for(var i = 0; i < t.results.length; i++){
-                    $('#tweets').append("<b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
+                    $('#tweets').append("<iframe src=" + t.results[i].user.profile_image_url_https + " frameborder=0 scrolling=no onload=this.style.height=this.contentDocument.body.scrollHeight +'px';></iframe><br><b> Handle: " + t.results[i].user.screen_name + " </b><br><div class='content'>" + t.results[i].text + "</div><br>");
                 }
             });
         });

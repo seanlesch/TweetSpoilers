@@ -9,7 +9,7 @@
         <script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        
+        <title>TweetSpoilers</title>
         
         
         
@@ -69,11 +69,13 @@
             <option value = 'endgame'>Avengers: Endgame</option>
             <option value = 'GoT'>Game of Thrones Season 8</option>
             <option value = 'titanic'>Titanic</option>
+            <option value = 'other'>Other (use my own spoilers)</option>
           </select>
           
           <br>
-          <input type="text" id="other" class="form-control" placeholder="Enter your desired spoilers">
+          <input type="text" id="other" value= "" class="form-control" placeholder="Enter your desired spoilers">
         </div>
+        <br>
         <div class = "form-group">
           <button class = "btn btn-primary" id = "getresults" style="width:100%">Get results</button>
         </div>
@@ -82,35 +84,27 @@
       
             
       <br>
-      <h1>Tweets</h1>
-      <div id="tweets">
+      <h1 id="header">Tweets</h1>
+      <div>
         
         <div id = "tweets"></div>
       </div>
       
     </div>
 		<footer class="container">
-			<!--<nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-      </nav>--->
 		</footer>
 
     </body>
 
     <script>
         $('document').ready(function(){
+            $('#header').hide();
             var socket= io.connect('http://localhost:3000');
             
             $('#other').hide();
             $('#mediaselection').change(function(){
               var selectedText=$(this).find('option:selected').text();
-              
+            
               if(selectedText != 'Choose a movie or show'){
                 $('#getresults').data('media', selectedText);
               }
@@ -120,8 +114,11 @@
             $('#getresults').on('click', function(e){
               
                 e.preventDefault();
-                
+                $('#header').show();
                 $('#tweets').empty();
+                if($('#other').is(':visible')){
+                  $(this).data('media', $('#other').val())
+                }
                 var media = $(this).data('media');
                 if (media != undefined) {
                   
@@ -147,11 +144,11 @@
         });
         $('#mediaselection').on('change', function(){
                 
-                if(this.value =='Other'){
-                  $('#other').show();
+                if(this.value =='other'){
+                  $('#other').show().prop('required', true);
                 }
                 else{
-                  $('#other').hide();
+                  $('#other').hide().prop('required', false);
                 }
             }); 
           

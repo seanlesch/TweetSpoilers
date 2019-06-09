@@ -34,6 +34,7 @@ io.on('connection', function (socket) {
    //Default parameters. Max 10 keywords/operators
     
     socket.on('getresults', function(objectData){
+        
         if(objectData === 'Avengers: Endgame'){
             params = endgame;
             
@@ -48,9 +49,10 @@ io.on('connection', function (socket) {
         }
         T.get('search/tweets', params, function(err, data, response){
             if(!err && response.statusCode === 200){
-                io.emit('tweet', { data: data });
+                
+                socket.emit('tweet', { data: data });
             } else {
-                console.log(err);
+                
             }
         });
 

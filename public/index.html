@@ -10,6 +10,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <title>TweetSpoilers</title>
+        <link rel="icon" href="/img/favicon.ico">
         
         
         
@@ -125,12 +126,13 @@
                   socket.emit('getresults', media);
                   socket.on('tweet', function (objectData) {
                     var t = objectData.data;
+                    console.log(t);
                     for (var i = 0; i < t.statuses.length; i++) {
                       
                       $('#tweets').append(
                         $("<div>").html('<br><iframe class="profilepic" src="' + t.statuses[i].user.profile_image_url_https + '" frameborder=0 scrolling=no></iframe> <a href="#">' + t.statuses[i].user.screen_name + '</a>')
                           .append(
-                            $("<div>").text(t.statuses[i].text).hide()
+                            $("<div>").text(t.statuses[i].text).hide().append('<br><a href= "https://twitter.com/statuses/'+ t.statuses[i].id_str +'">See full tweet</a>')
                           )
                           .on('click', function () {
                             $(this).children('div').toggle();

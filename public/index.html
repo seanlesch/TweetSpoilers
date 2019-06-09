@@ -132,13 +132,13 @@
                       $('#tweets').append(
                         $("<div>").html('<br><iframe class="profilepic" src="' + t.statuses[i].user.profile_image_url_https + '" frameborder=0 scrolling=no></iframe> <a href="#">' + t.statuses[i].user.screen_name + '</a>')
                           .append(
-                            $("<div>").text(t.statuses[i].text).hide().append('<br><a href= "https://twitter.com/statuses/'+ t.statuses[i].id_str +'">See full tweet</a>')
+                            $("<div>").text(t.statuses[i].text).hide()
                           )
                           .on('click', function () {
                             $(this).children('div').toggle();
                             return false;
                           })
-                      )
+                      ).append('<a href= "https://twitter.com/statuses/'+ t.statuses[i].id_str +'">See full tweet</a>')
                 }
               });
               }

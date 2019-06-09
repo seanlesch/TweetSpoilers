@@ -18,22 +18,49 @@ app.get('/', function(req, res){
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+var endgame = {
+    q: 'iron man dies -spoiler',
+    count: 100,
+    result_type: 'mixed'
+ 
+}
+var GoT = {
+    q: 'jon kills daenerys -spoiler',
+    count: 100, 
+    result_type: 'mixed'
+}
 
+var titanic = {
+    q: 'titanic jack dies -spoiler',
+    count: 100,
+    result_type: 'mixed'
+}
 
 io.on('connection', function (socket) {
-   
-    var params = {
-        q: 'iron man dies -spoiler',
-        count: 100,
-        result_type: 'mixed'
-     
-    }
+   //Default parameters. Max 10 keywords/operators
+    
     socket.on('getresults', function(objectData){
+        
+        if(objectData === 'Avengers: Endgame'){
+            params = endgame;
+            
+        }else if(objectData === 'Game of Thrones Season 8'){
+            params = GoT;
+        }else if(objectData === 'Titanic'){
+            params = titanic;
+        }else{
+            params = {
+                q: objectData,
+                count: 100, 
+                result_type: 'mixed'
+            }
+        }
         T.get('search/tweets', params, function(err, data, response){
             if(!err && response.statusCode === 200){
-                io.emit('tweet', { data: data });
+                
+                socket.emit('tweet', { data: data });
             } else {
-                console.log(err);
+                
             }
         });
 

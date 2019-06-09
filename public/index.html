@@ -8,6 +8,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
         
         
@@ -36,12 +37,15 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#">About</a>
                         </li>
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/seanlesch/TweetSpoilers"><i class="fa fa-github"></i>
+                          </a>
+                        </li>
                       </ul>
                       <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -64,7 +68,7 @@
             <option value = ''>Choose a movie or show</option>
             <option value = 'endgame'>Avengers: Endgame</option>
             <option value = 'GoT'>Game of Thrones Season 8</option>
-            
+            <option value = 'titanic'>Titanic</option>
           </select>
           
           <br>
@@ -94,8 +98,8 @@
           <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
-      </nav>
-		</footer>-->
+      </nav>--->
+		</footer>
 
     </body>
 
@@ -127,7 +131,7 @@
                     for (var i = 0; i < t.statuses.length; i++) {
                       
                       $('#tweets').append(
-                        $("<div>").html('<a href="#">' + t.statuses[i].user.screen_name + '</a>')
+                        $("<div>").html('<br><iframe class="profilepic" src="' + t.statuses[i].user.profile_image_url_https + '" frameborder=0 scrolling=no></iframe> <a href="#">' + t.statuses[i].user.screen_name + '</a>')
                           .append(
                             $("<div>").text(t.statuses[i].text).hide()
                           )

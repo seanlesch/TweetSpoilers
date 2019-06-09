@@ -30,6 +30,12 @@ var GoT = {
     result_type: 'mixed'
 }
 
+var titanic = {
+    q: 'titanic jack dies -spoiler',
+    count: 100,
+    result_type: 'mixed'
+}
+
 io.on('connection', function (socket) {
    //Default parameters. Max 10 keywords/operators
     
@@ -40,6 +46,8 @@ io.on('connection', function (socket) {
             
         }else if(objectData === 'Game of Thrones Season 8'){
             params = GoT;
+        }else if(objectData === 'Titanic'){
+            params = titanic;
         }else{
             params = {
                 q: objectData,
